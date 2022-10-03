@@ -58,7 +58,7 @@ $read_data = $statement->fetchAll(PDO::FETCH_ASSOC);
             <td><?php echo $data['name'] ?></td>
             <td><?php echo $data['gender'] ?></td>
             <td><?php echo $data['create_date'] ?></td>
-            <td><img src="<?php echo $data['image'] ?>"></td>
+            <td><img src="<?php echo $data['image']; ?>" class="image"></td>
             <td>
                 <button type="button" class="btn btn-sm btn-primary">Edit</button>
                 <button type="button" class="btn btn-sm btn-danger">Delete</button>
