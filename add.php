@@ -23,7 +23,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       mkdir('asset');
     }
 
-    $image_path = '';
+    // $image_path = '';
     if(empty($error))
     {
 

@@ -22,15 +22,12 @@ $read_data = $statement->fetchAll(PDO::FETCH_ASSOC);
     
     <nav class="navbar navbar-expand-lg bg-secondary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">My Anime</a>
+        <a class="navbar-brand" href="index.php">My Anime</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-warning">Search</button>
-        </form>
+        
         </div>
     </div>
     </nav>
@@ -39,15 +36,19 @@ $read_data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="container">
     <h1 style="color: white;">Welcome</h1><br>
+    <form class="d-flex" role="search" >
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button type="button" class="btn btn-warning">Search</button>
+        </form><br>
     <a href="add.php" type="button" class="btn btn-success">CREATE</a><br><br>
     <table class="table table-dark table-striped">
         <thead>
             <tr>
             <th scope="col">No.</th>
+            <th scope="col">Image</th>
             <th scope="col">Character Name</th>
             <th scope="col">Gender</th>
             <th scope="col">Date Added</th>
-            <th scope="col">Image</th>
             <th scope="col">Action</th>
             </tr>
         </thead>
@@ -55,13 +56,16 @@ $read_data = $statement->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach($read_data as $i => $data):?>
                 <tr>
             <th scope="row"><?php echo $i +1 ?></th>
+            <td><img src="<?php echo $data['image']; ?>" class="image"></td>
             <td><?php echo $data['name'] ?></td>
             <td><?php echo $data['gender'] ?></td>
             <td><?php echo $data['create_date'] ?></td>
-            <td><img src="<?php echo $data['image']; ?>" class="image"></td>
             <td>
                 <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                <form style="display: inline-block;" action="delete.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
             </td>
             </tr>
             <?php endforeach; ?>
