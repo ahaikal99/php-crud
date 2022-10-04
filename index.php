@@ -61,7 +61,7 @@ $read_data = $statement->fetchAll(PDO::FETCH_ASSOC);
             <td><?php echo $data['gender'] ?></td>
             <td><?php echo $data['create_date'] ?></td>
             <td>
-                <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                <a href="update.php?id=<?php echo $data['id'] ?>" type="button" class="btn btn-sm btn-primary">Edit</a>
                 <form style="display: inline-block;" action="delete.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
