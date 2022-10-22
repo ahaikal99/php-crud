@@ -3,7 +3,14 @@
 $pdo = new PDO('mysql:host=localhost;port=3306;dbname=anime', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$statement = $pdo->prepare('SELECT * FROM characters ORDER BY create_date DESC');
+$search = $_GET['search']??'';
+
+if($search){
+    $statement = $pdo->prepare('SELECT * FROM characters WHERE name LIKE :name ORDER BY name DESC');
+    $statement->bindValue(':name', "%$search%");
+} else {
+    $statement = $pdo->prepare('SELECT * FROM characters ORDER BY create_date DESC');
+}
 $statement->execute();
 $read_data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -37,7 +44,7 @@ $read_data = $statement->fetchAll(PDO::FETCH_ASSOC);
     <div class="container">
     <h1 style="color: white;">Welcome</h1><br>
     <form class="d-flex" role="search" >
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button type="button" class="btn btn-warning">Search</button>
         </form><br>
     <a href="add.php" type="button" class="btn btn-success">CREATE</a><br><br>
